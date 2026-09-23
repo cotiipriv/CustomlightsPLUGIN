@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.cotii'
+version = '1.0.1'
+
+// Built against the oldest supported API (1.20.1) so the jar loads on 1.20.1 - 1.21.x Paper/Spigot servers
+def paperApiVersion = findProperty('paperApiVersion') ?: '1.20.1-R0.1-SNAPSHOT'
+def javaRelease = (findProperty('javaRelease') ?: '17') as Integer
+
+dependencies {
+    compileOnly "io.papermc.paper:paper-api:${paperApiVersion}"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = javaRelease
+    options.encoding = 'UTF-8'
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('plugin.yml') {
+        expand version: project.version
+    }
+}

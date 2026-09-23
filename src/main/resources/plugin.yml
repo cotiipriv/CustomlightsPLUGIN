@@ -1,0 +1,16 @@
+name: CustomLights
+version: '${version}'
+main: com.cotii.customlightsplugin.CustomLightsPlugin
+api-version: '1.20'
+author: Cotii_
+description: Server-side controller and persistence for the CustomLights client mod.
+commands:
+  lightplugin:
+    description: Manage CustomLights for players using the client mod.
+    usage: /lightplugin <set|remove|move|follow|model_id|model_remove|animate|stretch|angle|seethrough|flashlight|paste|object|preset|list|reload> ...
+    aliases: [lpl]
+    permission: customlights.admin
+permissions:
+  customlights.admin:
+    description: Allows managing server-synced CustomLights.
+    default: op
